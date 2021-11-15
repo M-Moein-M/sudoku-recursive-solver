@@ -4,11 +4,16 @@ class Solver {
         int solve() {
             std::cout << "Running solver" << std::endl;
             readBoard();
+            
+            Validator v(board);
+            validator = &v;
+            
             return 0;
         }
     
     private:
         std::string board[9];
+        Validator *validator;
         void readBoard() {
             std::ifstream boardfile("board.txt");
             for (int i=0; i<9; i++){
