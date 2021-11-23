@@ -1,6 +1,12 @@
 class Solver {
     public:
-        Solver() {}
+        Solver() {
+            std::cout << "Initiating Solver" << std::endl;
+            readBoard();
+            
+            Validator v(board);
+            validator = &v;
+        }
         int solve(); 
     private:
         void readBoard();
@@ -9,11 +15,6 @@ class Solver {
 };
 
 int Solver::solve() {
-    std::cout << "Running solver" << std::endl;
-    readBoard();
-    
-    Validator v(board);
-    validator = &v;
     
     return 0;
 }
