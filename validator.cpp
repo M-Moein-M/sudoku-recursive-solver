@@ -7,6 +7,7 @@ class Validator {
     private:
         std::string *board;
         bool checkRows();
+        bool useNumber(char *used, int boardVal);
         int row, col, val;
 };
 
@@ -17,18 +18,24 @@ int Validator::isValid(int r, int c, int v) {
     return int(checkRows());
 }
 
+bool Validator::useNumber(char *used, int boardVal) {
+    int numVal = boardVal - '0';
+    if (numVal == 0)
+        return true;
+    else if (used[numVal] != 1)
+        return false;
+    used[numVal] = 1;
+    return true;
+}
+
 bool Validator::checkRows(){
     board[row][col] = val; // fake inserting the value
     for (int i = 0; i < 9; i++) {
         char *used = (char*)calloc(10, sizeof(char));
         for (int j = 0; j < 9; j++){
-            int numVal = board[i][j] - '0';
-            if (numVal == 0)
-                continue;
-            else if (used[numVal] != 0)
+            bool usedOnce = useNumber(used, board[i][j]);
+            if (!usedOnce)
                 return false;
-            else
-                used[numVal] = 1;
         }
     }
     board[row][col] = 0; // undo inserting the value
