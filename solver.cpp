@@ -11,12 +11,34 @@ class Solver {
     private:
         void readBoard();
         std::string board[9];
+        bool getEmptyCord(int *row, int *col);
         Validator *validator;
 };
 
+bool Solver::getEmptyCord(int *row, int *col) {
+    for (int i = 0; i < 9; i++)
+        for (int j = 0; j < 9; j++)
+            if (board[i][j] == '0') {
+                *row = i;
+                *col = j;
+                return true;
+            }
+    return false;
+}
+
 int Solver::solve() {
-    
-    return 0;
+    int row, col;
+    bool isNotSolved = getEmptyCord(&row, &col);
+    if (isNotSolved) {
+        for (int i=1; i<=9; i++){
+            bool isValidNum = solve() && validator->isValid(row, col, '0'+i);
+            if (isValidNum)
+                board[row][col] = '0'+i;
+                return 1;
+        }
+        return 0;
+    } 
+    return 1;
 }
 
 void Solver::readBoard() {
