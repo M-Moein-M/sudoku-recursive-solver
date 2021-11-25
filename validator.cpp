@@ -22,14 +22,13 @@ bool Validator::useNumber(char *used, int boardVal) {
     int numVal = boardVal - '0';
     if (numVal == 0)
         return true;
-    else if (used[numVal] != 1)
+    else if (used[numVal] >= 1)
         return false;
-    used[numVal] = 1;
+    used[numVal] += 1;
     return true;
 }
 
 bool Validator::checkRows(){
-    board[row][col] = val; // fake inserting the value
     for (int i = 0; i < 9; i++) {
         char *used = (char*)calloc(10, sizeof(char));
         for (int j = 0; j < 9; j++){
@@ -38,7 +37,6 @@ bool Validator::checkRows(){
                 return false;
         }
     }
-    board[row][col] = 0; // undo inserting the value
     return true;
 }
 
