@@ -39,11 +39,12 @@ int Solver::solve() {
     bool isNotSolved = getEmptyCord(&row, &col);
     if (isNotSolved) {
         for (int i=1; i<=9; i++){
-            bool isValidNum = solve() && validator->isValid(row, col, '0'+i);
+            board[row][col] = '0'+i;
+            bool isValidNum = validator->isValid(row, col, '0'+i) && solve();
             if (isValidNum)
-                board[row][col] = '0'+i;
                 return 1;
         }
+        board[row][col] = '0';
         return 0;
     } 
     return 1;
