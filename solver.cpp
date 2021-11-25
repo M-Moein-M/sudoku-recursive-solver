@@ -7,7 +7,8 @@ class Solver {
             Validator v(board);
             validator = &v;
         }
-        int solve(); 
+        int solve();
+        void printBoard();
     private:
         void readBoard();
         std::string board[9];
@@ -15,6 +16,13 @@ class Solver {
         Validator *validator;
 };
 
+void Solver::printBoard() {
+    for (int i=0; i<9; i++) {
+        for (int j=0; j<9; j++)
+            std::cout << board[i][j] << ' ';
+        std::cout << std::endl;
+    }
+}
 bool Solver::getEmptyCord(int *row, int *col) {
     for (int i = 0; i < 9; i++)
         for (int j = 0; j < 9; j++)
