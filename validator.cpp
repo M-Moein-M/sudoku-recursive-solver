@@ -7,13 +7,14 @@ class Validator {
     private:
         std::string *board;
         bool useNumber(char *, int);
-        bool checkRows();
-        bool checkCols();
+        bool checkRowOrCol(bool testRows);
         char NoSegFault;  // removing this results in segfault ???
 };
 
 bool Validator::isValid() {
-    return checkRows() && checkCols();
+    bool validCols = checkRowOrCol(false);
+    bool validRows = checkRowOrCol(true);
+    return validCols && validRows;
 }
 
 bool Validator::useNumber(char *used, int boardVal) {
@@ -26,27 +27,16 @@ bool Validator::useNumber(char *used, int boardVal) {
     return true;
 }
 
-bool Validator::checkCols() {
+bool Validator::checkRowOrCol(bool testRows) {
     for (int j=0; j<9; j++) {
         char *used = (char*)calloc(10, sizeof(char));
         for (int i=0; i<9; i++){
-            bool usedOnce = useNumber(used, board[i][j]);
+            bool usedOnce = useNumber(
+                used,
+                testRows ? board[i][j] : board[j][i]);
             if (!usedOnce)
                 return false;
         }
     }
     return true;
 }
-
-bool Validator::checkRows(){
-    for (int i = 0; i < 9; i++) {
-        char *used = (char*)calloc(10, sizeof(char));
-        for (int j = 0; j < 9; j++){
-            bool usedOnce = useNumber(used, board[i][j]);
-            if (!usedOnce)
-                return false;
-        }
-    }
-    return true;
-}
-
