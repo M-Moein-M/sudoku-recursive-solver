@@ -40,7 +40,7 @@ int Solver::solve() {
     if (isNotSolved) {
         for (int i=1; i<=9; i++){
             board[row][col] = '0'+i;
-            bool isValidNum = validator->isValid(row, col, '0'+i) && solve();
+            bool isValidNum = validator->isValid() && solve();
             if (isValidNum)
                 return 1;
         }

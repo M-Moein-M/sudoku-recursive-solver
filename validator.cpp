@@ -3,19 +3,16 @@ class Validator {
         Validator(std::string b[9]) {
             board = b;
         }
-        int isValid(int row, int col, int val);
+        bool isValid();
     private:
         std::string *board;
+        bool useNumber(char *, int);
         bool checkRows();
-        bool useNumber(char *used, int boardVal);
-        int row, col, val;
+        char NoSegFault;  // removing this results in segfault ???
 };
 
-int Validator::isValid(int r, int c, int v) {
-    row = r;
-    col = c;
-    val = v;
-    return int(checkRows());
+bool Validator::isValid() {
+    return checkRows();
 }
 
 bool Validator::useNumber(char *used, int boardVal) {
