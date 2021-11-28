@@ -6,7 +6,10 @@
 
 int main(){
     Solver s;
-    s.solve();
-    s.printBoard();
+    bool solved = s.solve();
+    if (solved)
+        s.printBoard();
+    else
+        std::cout << "This board can't be solved" << std::endl;
     return 0;
 }
