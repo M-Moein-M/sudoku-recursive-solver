@@ -13,8 +13,8 @@ class Validator {
 };
 
 bool Validator::isValid() {
-    bool validCols = checkRowOrCol(false);
-    bool validRows = checkRowOrCol(true);
+    bool validRows = checkRowOrCol(false);
+    bool validCols = checkRowOrCol(true);
     bool validGrids = checkGrids();
     return validCols && validRows && validGrids;
 }
